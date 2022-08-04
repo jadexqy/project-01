@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jQurey/jquery.min.js"></script>
+    <script src="./template-web.js"></script>
+</head>
+
+<body>
+    <!-- 传统方式渲染的html
+        <div id="title"></div>
+    <div>姓名：<span id="name"></span></div>
+    <div>年龄：<span id="age"></span></div>
+    <div>会员：<span id="isVIP"></span></div>
+    <div>注册事件：<span id="regTime"></span></div>
+    <div>爱好：
+        <ul id="hobby">
+            <li>爱好1</li>
+        </ul>
+    </div> -->
+    <!-- 定义模板 -->
+    <div id="content"></div>
+    <script type="text/html" id="tpl">
+        <h1>{{name}} ---- {{age}}</h1>
+        <!-- 如果输出的value值中包含HTML结构，需要使用原文输出语法，@ -->
+        {{@ title}} 
+        <div>
+            {{if isVIP === true}}
+            flag为真
+            {{else if isVIP === false}}
+            flag为假
+            {{/if}}
+        </div>
+    </script>
+    <script>
+        // 使用传统方式渲染
+        /* var data = {
+            title:'<h3>用户信息</h3>',
+            name:'aa',
+            age:20,
+            isVIP:true,
+            regTime:new Date(),
+            hobby:['吃饭','睡觉','打豆豆']
+        }
+        $(function(){
+            $('#title').html(data.title);
+            $('#name').html(data.name);
+            $('#age').html(data.age);
+            $('#isVIP').html(data.isVIP);
+            $('#regTime').html(data.regTime);
+
+            var rows = [];
+            $.each(data.hobby,function(i,item){
+                rows.push('<li>'+item+'</li>')
+            })
+            $('#hobby').html(rows.join(''))
+        })
+ */
+
+        // 使用模板引擎
+
+
+        // 定义数据
+        var data = {
+            title: '<h3>用户信息</h3>',
+            name: 'aa',
+            age: 20,
+            isVIP: true,
+            regTime: new Date(),
+            hobby: ['吃饭', '睡觉', '打豆豆']
+        }
+        // 调用template函数
+        var htmlStr = template('tpl', data)
+        console.log(htmlStr);
+        $('#content').html(htmlStr);
+    </script>
+</body>
+
+</html>
